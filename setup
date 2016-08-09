@@ -1,0 +1,11 @@
+#!/bin/bash
+
+composer install \
+  --no-dev \
+  --no-interaction \
+  --no-scripts \
+  --optimize-autoloader
+
+php artisan optimize
+
+chown -R www-data:www-data .
