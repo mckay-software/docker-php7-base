@@ -2,9 +2,14 @@ FROM php:7.0-apache
 MAINTAINER McKay Software <hello@mckaysoftware.co.nz>
 
 CMD /start
-ENV APP_LOG=errorlog
 EXPOSE 80
 WORKDIR /var/www/html
+
+ENV APP_LOG=errorlog
+ENV CACHE_DRIVER=file
+ENV DB_CONNECTION=mysql
+ENV QUEUE_DRIVER=sync
+ENV SESSION_DRIVER=database
 
 COPY ./php.ini /usr/local/etc/php/
 COPY ./setup ./start /
