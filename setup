@@ -3,7 +3,7 @@
 if [[ $EUID -eq 0 ]]; then
   chown -R :www-data .
   chmod -R g+w .
-  exec su -p www-data $0
+  exec su -ps /bin/bash www-data $0
 fi
 
 composer install \
