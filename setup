@@ -8,4 +8,5 @@ composer install \
 
 php artisan optimize
 
-chown -R www-data:www-data .
+chown -R :www-data .
+chmod -R g+w .
