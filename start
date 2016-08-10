@@ -6,4 +6,8 @@ env | tee .env
 echo '========== ENV =========='
 echo
 
+if [ ! -z "$APP_KEY" ]; then
+  php artisan key:generate
+fi
+
 exec apache2-foreground
