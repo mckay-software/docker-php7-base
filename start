@@ -2,7 +2,7 @@
 
 echo "Current directory: $(pwd)"
 echo '========== ENV =========='
-env | tee .env
+env | sed -r 's|([^=]+)=(.+)|\1="\2"|' | tee .env
 echo '========== ENV =========='
 echo
 
