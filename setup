@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $EUID -eq 0 ]]; then
+  chown -R :www-data .
+  chmod -R g+w .
+  exec su -p www-data $0
+fi
+
 composer install \
   --no-dev \
   --no-interaction \
@@ -8,5 +14,3 @@ composer install \
 
 php artisan optimize
 
-chown -R :www-data .
-chmod -R g+w .

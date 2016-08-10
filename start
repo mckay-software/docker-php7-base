@@ -3,10 +3,12 @@
 echo "Current directory: $(pwd)"
 echo '========== ENV =========='
 
-env | sed -r 's|([^=]+)=(.+)|\1="\2"|' | tee .env
+env | sed -r 's|([^=]+)=(.+)|\1="\2"|' |\
+  su www-data tee .env
 
 if [ -z "$APP_KEY" ]; then
-  php -r "echo 'APP_KEY=\"base64:'.base64_encode(random_bytes(32)).'\"';" | tee -a .env
+  php -r "echo 'APP_KEY=\"base64:'.base64_encode(random_bytes(32)).'\"';" |\
+    su www-data tee -a .env
 fi
 
 echo
