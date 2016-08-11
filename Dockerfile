@@ -17,6 +17,8 @@ RUN apt-get update &&\
     mv composer.phar /usr/bin/composer &&\
     a2enmod rewrite &&\
     sed -i 's|DocumentRoot /var/www/html|DocumentRoot /var/www/html/public|' \
+      /etc/apache2/sites-enabled/000-default.conf &&\
+    sed -i 's|#LogLevel info ssl:warn|SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1|' \
       /etc/apache2/sites-enabled/000-default.conf
 
 ENV APP_LOG errorlog
