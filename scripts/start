@@ -1,11 +1,11 @@
 #!/bin/bash
 
-
 env | sed -r 's|([^=]+)=(.+)|\1="\2"|' > .env
 
-if [ -z "$APP_KEY" ]; then
-  php -r "echo 'APP_KEY=\"base64:'.base64_encode(random_bytes(32)).'\"';" >> .env
-fi
+dir="/scripts/start.d"
+for f in $(ls "$dir"); do
+  source "$dir/$f"
+done
 
 chown www-data:www-data .env
 

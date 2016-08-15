@@ -6,11 +6,7 @@ if [[ $EUID -eq 0 ]]; then
   exec su -ps /bin/bash www-data $0
 fi
 
-composer install \
-  --no-dev \
-  --no-interaction \
-  --no-scripts \
-  --optimize-autoloader
-
-php artisan optimize
-
+dir="/scripts/setup.d"
+for f in $(ls "$dir"); do
+  source "$dir/$f"
+done
